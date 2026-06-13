@@ -1,7 +1,8 @@
 name: Portfolio Updater
 
 on:
-  workflow_dispatch:
+  repository_dispatch:
+    types: [update-portfolio]
 
 jobs:
 
@@ -21,5 +22,12 @@ jobs:
           python-version: '3.12'
 
       - run: pip install -r requirements.txt
-
+      - name: Check Secret
+        run: |
+            if [ -z "${{ secrets.PAT_TOKEN }}" ]; then
+            echo "SECRET NOT FOUND"
+            else
+            echo "SECRET FOUND"
+            fi
+      
       - run: python bot.py
