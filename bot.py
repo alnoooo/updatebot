@@ -12,6 +12,9 @@ projects = []
 
 for repo in repos:
 
+    if repo["name"] == "portfolio":
+        continue
+
     projects.append(
         {
             "title": repo["name"],
